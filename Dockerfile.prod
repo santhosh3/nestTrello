@@ -1,0 +1,17 @@
+FROM node:18-alpine
+
+WORKDIR /usr/src/app
+
+COPY . .
+
+RUN npm set strict-ssl false
+
+RUN npm install ionic --loglevel verbose
+
+RUN npm run build
+
+RUN rm -rf ./src
+
+EXPOSE 3001
+
+CMD [ "npm","run","start:prod" ]
